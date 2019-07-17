@@ -5,6 +5,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SanityArchiver
 {
@@ -53,14 +54,15 @@ namespace SanityArchiver
             File.Decrypt(file.FullName);
         }
 
-        public void Copy()
+        public void Copy(FileInfo file, string targetPath)
         {
+            File.Copy(file.FullName, Path.Combine(targetPath, file.Name));
 
         }
 
-        public void Move()
+        public void Move(FileInfo file, string targetPath)
         {
-
+            File.Move(file.FullName, Path.Combine(targetPath, file.Name));
         }
 
         public void EditAttributes()

@@ -8,7 +8,7 @@ namespace SanityArchiver
 {
     static class Program
     {
-        //[STAThread]
+        [STAThread]
 
         static void Main()
         {

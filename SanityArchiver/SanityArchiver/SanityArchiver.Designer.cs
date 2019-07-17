@@ -116,6 +116,7 @@
             this.DecryptButton.TabIndex = 6;
             this.DecryptButton.Text = "Decrypt";
             this.DecryptButton.UseVisualStyleBackColor = true;
+            this.DecryptButton.Click += new System.EventHandler(this.DecryptButton_Click);
             // 
             // AttributesButton
             // 
@@ -153,6 +154,7 @@
             this.BrowseFilesButton.TabIndex = 10;
             this.BrowseFilesButton.Text = "Browse Files";
             this.BrowseFilesButton.UseVisualStyleBackColor = true;
+            this.BrowseFilesButton.Click += new System.EventHandler(this.BrowseFilesButton_Click);
             // 
             // OpenFileButton
             // 
@@ -213,6 +215,7 @@
             this.MoveButton.TabIndex = 15;
             this.MoveButton.Text = "Move";
             this.MoveButton.UseVisualStyleBackColor = true;
+            this.MoveButton.Click += new System.EventHandler(this.MoveButton_Click);
             // 
             // CopyButton
             // 
@@ -223,6 +226,7 @@
             this.CopyButton.TabIndex = 14;
             this.CopyButton.Text = "Copy";
             this.CopyButton.UseVisualStyleBackColor = true;
+            this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
             // 
             // SearchGroupBox
             // 

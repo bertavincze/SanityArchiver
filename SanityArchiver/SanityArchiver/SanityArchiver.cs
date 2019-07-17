@@ -203,7 +203,101 @@ namespace SanityArchiver
 
         private void EncryptButton_Click(object sender, EventArgs e)
         {
+            if (SelectedFile != null)
+            {
+                FileUtils fileUtils = new FileUtils();
+                fileUtils.Encrypt(SelectedFile);
+            }
+            ShowFileList(SourcePath);
+        }
 
+        private void DecryptButton_Click(object sender, EventArgs e)
+        {
+            if (SelectedFile != null)
+            {
+                FileUtils fileUtils = new FileUtils();
+                fileUtils.Decrypt(SelectedFile);
+            }
+            ShowFileList(SourcePath);
+        }
+
+        private void CopyButton_Click(object sender, EventArgs e)
+        {
+            if (SelectedFile != null)
+            {
+                FileUtils fileUtils = new FileUtils();
+                try
+                {
+                    FolderBrowserDialog dialog = new FolderBrowserDialog();
+                    DialogResult dialogResult = dialog.ShowDialog();
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        string targetPath = dialog.SelectedPath;
+                        fileUtils.Copy(SelectedFile, targetPath);
+                        MessageBox.Show($"Successfully copied file to: {targetPath}");
+                        ShowFileList(SourcePath);
+                    }
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    MessageBox.Show($"Error locating file.\n\nError message: {ex.Message}\n\n" +
+                        $"Details:\n\n{ex.StackTrace}");
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show($"Error while copying file.\n\nError message: {ex.Message}\n\n" +
+                        $"Details:\n\n{ex.StackTrace}");
+                }
+            }
+        }
+
+        private void MoveButton_Click(object sender, EventArgs e)
+        {
+            if (SelectedFile != null)
+            {
+                FileUtils fileUtils = new FileUtils();
+                try
+                {
+                    FolderBrowserDialog dialog = new FolderBrowserDialog();
+                    DialogResult dialogResult = dialog.ShowDialog();
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        string targetPath = dialog.SelectedPath;
+                        fileUtils.Move(SelectedFile, targetPath);
+                        MessageBox.Show($"Successfully moved file to: {targetPath}");
+                        ShowFileList(SourcePath);
+                    }
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    MessageBox.Show($"Error locating file.\n\nError message: {ex.Message}\n\n" +
+                        $"Details:\n\n{ex.StackTrace}");
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show($"Error while moving file.\n\nError message: {ex.Message}\n\n" +
+                        $"Details:\n\n{ex.StackTrace}");
+                }
+            }
+        }
+
+        private void BrowseFilesButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                DialogResult dialogResult = openFileDialog.ShowDialog();
+                if (dialogResult == DialogResult.OK)
+                {
+                    SelectedFile = new FileInfo(openFileDialog.FileName);
+                    ShowFileList(SourcePath);
+                }
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show($"Error accessing file.\n\nError message: {ex.Message}\n\n" +
+                    $"Details:\n\n{ex.StackTrace}");
+            }
         }
     }
 }
